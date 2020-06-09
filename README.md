@@ -1,4 +1,15 @@
-# 11min Tutorial - Github 
+특정 키워드 관련 네이버 블로그 글들을 크롤링하여 분석해보는 pjt 입니다.
+
+
+
+
+
+
+
+
+
+
+<!-- # 11min Tutorial - Github 
 > 하루에 1번, 11분 tutorial - Github repository 관리
 
 [![author-ohahohah](https://img.shields.io/badge/author-ohahohah-blue.svg)](https://github.com/ohahohah/)
@@ -50,4 +61,4 @@
 ## License
 ohahohah – [ohahohah.dev@gmail.com](mailto:ohahohah.dev+gh@gmail.com)  
 
-MIT license를 준수합니다. [LICENSE](LICENSE)에서 자세한 정보를 확인할 수 있습니다.  
+MIT license를 준수합니다. [LICENSE](LICENSE)에서 자세한 정보를 확인할 수 있습니다.   -->

@@ -1,6 +1,5 @@
-# 아래는 구글링한 심플코드 &참고 사이트
-# : https://www.fun-coding.org/crawl_basic3.html 
-# https://m.blog.naver.com/PostView.nhn?blogId=pearl097&logNo=221529275979&proxyReferer=https:%2F%2Fwww.google.com%2F
+# 따라한 참고 사이트 : https://m.blog.naver.com/PostView.nhn?blogId=pearl097&logNo=221529275979&proxyReferer=https:%2F%2Fwww.google.com%2F
+# 참고 했으나 이해못함 :  https://jeongwookie.github.io/2019/03/20/190320-collect-data-using-naver-search-api/
 
 import requests
 from urllib.parse import urlparse
@@ -14,47 +13,38 @@ def blog_response(keyword, display, page) :
 
 keyword = "식기세척기"
 
-data = blog_response(keyword, 10, 2)
+data = blog_response(keyword, 10, 3)
 # print(data)
 
-title=data['items']['tile']
-# print(title)
-link=data['items']['link']
-description=data['items']['description']
-bloggername=data['items']['bloggername']
-bloggerlink=data['items']['bloggerlink']
-postdate=data['items']['postdate']
+for i in data['items'] :
+    # print(i['title']) ★★★★★★★왜 10개씩 3페이지, 총 30개인데 10개만 표시되는거지?? 앞에 print data는 전체 데이터 다 보여줌
 
-#★★★★질문★★★★★
-# 20번쨰줄 print(title) 실행 시, 'title=data['items']['title'] 
-# TypeError: list indices must be integers or slices, not str
-# (venv)''라고 뜸. 몇번째 title부터 print해야하는지 지정되지 않아
-# 에러가 나는 것 같은데... 전체 title 리스트를 터미널에서 뜨게 하려면 어떻게 해야하나요?
-# https://jhnoru.tistory.com/19 참고해서 아래처럼 반복문 썼는데.. 어디가 잘못된건지...
-# for i in data : 
-#     title=list.append[i[data['items']['title']]]
-# print(title)
+    title=i['title'].replace("<b>","").replace("</b>","")
+    link=i['link']
+    description=i['description'].replace("<b>","").replace("</b>","")
+    bloggername=i['bloggername']
+    bloggerlink=i['bloggerlink']
+    postdate_year=i['postdate'][0:4]
+    postdate_month=i['postdate'][4:6]
+    postdate_data=i['postdate'][6:8]
+    # print(postdate_month) ★★★★★★★왜 10개씩 3페이지, 총 30개인데 10개만 표시되는거지??
+    blogreview=[title,link,description,postdate_year, postdate_month, postdate_data] 
+    # print(blogreview) ★★★★★★★왜 10개씩 3페이지, 총 30개인데 10개만 표시되는거지?? 
+
+# ★★★★★★★ 아래와 같은 메세지가 터미널에 뜨는데, json 파일 저장법 관련 참고 자료 추천해주세요. 제가 찾은건 봐도...ㅠㅠ
+# 그리고 위에 print(blogreview)의 출력물이 10개만 보이면, json파일에도 10개만 저장되나요? 30개 다 저장하려면 어떻게 해야하나요?
+file=open(".blogreview.json", "w+")
+file.json(json.dumps(blogreview))
+print(json.dumps(blogreview))
 
 
-# ★할일1. Json 파일로 저장할 내용 및 형태 지정?
-# for blogreview in blogreviews
-# blogreviews=[title,link,description,postdate]
 
-# ★할일2. json파일로 저장하기
-# file=open(".blogreview.json", "w+")
-# file.json(json.dumps(blogreviews))
-
-# ★할일3. DB에 저장?
+# 추가로 할 일 : DB에 저장해보기
 
 
 
 
-# --------------------------
-
-
-
-
-# 아래 참조 : 네이버 제공 api
+# --------------------------네이버 제공 api--------------------------
 # import os
 # import sys
 # import urllib.request
